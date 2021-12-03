@@ -1,0 +1,14 @@
+D:\C#\Skooby-main\serverChat\bin\Debug\netcoreapp3.1\serverChat.exe
+D:\C#\Skooby-main\serverChat\bin\Debug\netcoreapp3.1\serverChat.deps.json
+D:\C#\Skooby-main\serverChat\bin\Debug\netcoreapp3.1\serverChat.runtimeconfig.json
+D:\C#\Skooby-main\serverChat\bin\Debug\netcoreapp3.1\serverChat.runtimeconfig.dev.json
+D:\C#\Skooby-main\serverChat\bin\Debug\netcoreapp3.1\serverChat.dll
+D:\C#\Skooby-main\serverChat\bin\Debug\netcoreapp3.1\serverChat.pdb
+D:\C#\Skooby-main\serverChat\obj\Debug\netcoreapp3.1\serverChat.csproj.AssemblyReference.cache
+D:\C#\Skooby-main\serverChat\obj\Debug\netcoreapp3.1\serverChat.GeneratedMSBuildEditorConfig.editorconfig
+D:\C#\Skooby-main\serverChat\obj\Debug\netcoreapp3.1\serverChat.AssemblyInfoInputs.cache
+D:\C#\Skooby-main\serverChat\obj\Debug\netcoreapp3.1\serverChat.AssemblyInfo.cs
+D:\C#\Skooby-main\serverChat\obj\Debug\netcoreapp3.1\serverChat.csproj.CoreCompileInputs.cache
+D:\C#\Skooby-main\serverChat\obj\Debug\netcoreapp3.1\serverChat.dll
+D:\C#\Skooby-main\serverChat\obj\Debug\netcoreapp3.1\serverChat.pdb
+D:\C#\Skooby-main\serverChat\obj\Debug\netcoreapp3.1\serverChat.genruntimeconfig.cache
