@@ -1,0 +1,357 @@
+﻿<Window
+       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Skooby"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:forms="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms" x:Name="window1" x:Class="Skooby.Window1"
+        mc:Ignorable="d"
+        Title="Window3" Height="500" Width="900" AllowsTransparency="True" WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Loaded="window1_Loaded" Closing="window1_Closing">
+    <Window.Resources>
+        <Storyboard x:Key="NotesOpen">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="gridNotes">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="100"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="gridNotes">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="NotesClose">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="gridNotes">
+                <EasingDoubleKeyFrame KeyTime="0" Value="100"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="gridNotes">
+                <EasingDoubleKeyFrame KeyTime="0" Value="100"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="ProfilOpen">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="gridProfil">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="67"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="gridProfil">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="ProfilClose">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="gridProfil">
+                <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="gridProfil">
+                <EasingDoubleKeyFrame KeyTime="0" Value="67"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <SolidColorBrush x:Key="TextBox.Static.Border" Color="#FF0C0C21"/>
+        <SolidColorBrush x:Key="TextBox.MouseOver.Border" Color="#FF0C0C21"/>
+        <SolidColorBrush x:Key="TextBox.Focus.Border" Color="#FF0C0C21"/>
+        <Style x:Key="TextBoxStyle1" TargetType="{x:Type TextBox}">
+            <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource TextBox.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="AllowDrop" Value="true"/>
+            <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
+            <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                            <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Opacity" TargetName="border" Value="0.56"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource TextBox.MouseOver.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource TextBox.Focus.Border}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="IsInactiveSelectionHighlightEnabled" Value="true"/>
+                        <Condition Property="IsSelectionActive" Value="false"/>
+                    </MultiTrigger.Conditions>
+                    <Setter Property="SelectionBrush" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}"/>
+                </MultiTrigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded"/>
+    </Window.Triggers>
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.982,0.5" StartPoint="0.023,0.5">
+                <GradientStop Color="#FF000040" Offset="1"/>
+                <GradientStop Color="#FF010121"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <StackPanel HorizontalAlignment="Left" Height="500" VerticalAlignment="Top" Width="130" >
+            <StackPanel.Background>
+                <LinearGradientBrush  EndPoint="0.898,0.52" StartPoint="-0.001,0.521">
+                    <GradientStop Color="#FF050546" Offset="0"/>
+                    <GradientStop Color="#FF02024F" Offset="1"/>
+                </LinearGradientBrush>
+            </StackPanel.Background>
+
+            <Image HorizontalAlignment="Left" Height="60" Margin="35,20,0,0" VerticalAlignment="Top" Width="60"/>
+            <materialDesign:PackIcon Kind="FileDocumentOutline" Background="Transparent" Foreground="White" Margin="53,25,0,0" RenderTransformOrigin="0.417,0.458" Width="23"/>
+            <TextBlock x:Name="TextBlockAddNotess" Foreground="White" Cursor="Hand" Text="Добаить заметку" FontWeight="Bold" TextAlignment="Center" Height="18" MouseDown="TextBlock_MouseDown"/>
+            <materialDesign:PackIcon Kind="FileDocumentOutline" Background="Transparent" Foreground="White" Margin="57,25,0,0" RenderTransformOrigin="0.417,0.458"/>
+            <TextBlock Foreground="White" Text="Посмотреть заметки" FontWeight="Bold" TextAlignment="Center" Height="18" Cursor="Hand" x:Name="TextBlockViewNotes" MouseDown="TextBlockViewNotes_MouseDown"/>
+            <Grid x:Name="gridNotes" Height="0" Opacity="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="48*"/>
+                    <ColumnDefinition Width="17*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock x:Name="btnAllNotes" Foreground="White" Text="Все заметки" TextAlignment="Center" Height="18" FontSize="10" Margin="0,11,0,71" Grid.ColumnSpan="2" MouseDown="TextBlock_MouseDown_1"/>
+                <TextBlock x:Name="btnCurrentNotes" Foreground="White" Text="Текущие заметки" TextAlignment="Center" FontSize="10" TextWrapping="Wrap" Margin="0,29,0,50" Grid.ColumnSpan="2" MouseDown="TextBlock_MouseDown_2"/>
+                <TextBlock x:Name="btnPendingNotes" Foreground="White" Text="Ожидающие заверешения заметки" TextAlignment="Center" TextWrapping="Wrap" Height="31" FontSize="10" Margin="0,51,0,18" Grid.ColumnSpan="2" MouseDown="TextBlock_MouseDown_3"/>
+                <TextBlock x:Name="btnCompletedNotes" Foreground="White" Text="Завершенные заметки" TextAlignment="Center" TextWrapping="Wrap" FontSize="10" Margin="0,82,0,0" Grid.ColumnSpan="2" MouseDown="TextBlock_MouseDown_4"/>
+            </Grid>
+            <materialDesign:PackIcon Kind="Chat" Background="Transparent" Foreground="White" Margin="57,25,0,0" RenderTransformOrigin="0.417,0.458" />
+            <TextBlock Foreground="White" Cursor="Hand" Text="Чат" FontWeight="Bold" TextAlignment="Center" Height="18" MouseDown="TextBlock_MouseDown_5"/>
+            <materialDesign:PackIcon Kind="Account" Background="Transparent" Foreground="White" Margin="57,20,0,0" RenderTransformOrigin="0.417,0.458"/>
+            <TextBlock Foreground="White" Text="Профиль" FontWeight="Bold" TextAlignment="Center" Height="18" Cursor="Hand" x:Name="TextBlockProfil" MouseDown="TextBlockProfil_MouseDown"/>
+            <Grid x:Name="gridProfil" HorizontalAlignment="Left" Height="0" VerticalAlignment="Top" Width="130" Opacity="0">
+                <TextBlock Foreground="White" Text="Личные данные" TextAlignment="Center" Height="18" Margin="0,24,0,25" FontSize="10" x:Name="PersonalData"/>
+                <TextBlock x:Name="blockSecurity" Foreground="White" Text="Безопасность" TextAlignment="Center" Height="18" Margin="0,42,0,7" FontSize="10"/>
+                <TextBlock x:Name="TextBlockMain" Foreground="White" Text="Главная" TextAlignment="Center" Height="18" Margin="0,6,0,43" FontSize="10"/>
+            </Grid>
+            <materialDesign:PackIcon Kind="GoogleAnalytics" Background="Transparent" Foreground="White" Margin="57,25,0,0" RenderTransformOrigin="0.417,0.458"/>
+            <TextBlock x:Name="textBlockGraphic" Foreground="White" Text="Каллендарь" FontWeight="Bold" TextAlignment="Center" Height="18"/>
+
+        </StackPanel>
+        <Grid Margin="154,20,24,400">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="7*"/>
+            </Grid.RowDefinitions>
+            <TextBlock x:Name="TextBlockDate" HorizontalAlignment="Left" Height="20" TextWrapping="Wrap" Text="Date" VerticalAlignment="Top" Width="144" FontSize="16" FontWeight="Bold" Foreground="White" Margin="0,2,0,0" Grid.RowSpan="2"/>
+            <TextBlock x:Name="TextBlockTime" HorizontalAlignment="Left" Height="20" Margin="0,24,0,0" TextWrapping="Wrap" Text="Time" VerticalAlignment="Top" Width="144" FontSize="16" FontWeight="Bold" Foreground="White" Grid.Row="1"/>
+            <Image HorizontalAlignment="Left" Height="40" Margin="684,1,-2,0" VerticalAlignment="Top" Width="40" Grid.Row="1" x:Name="imgMainProfil"/>
+            <TextBlock x:Name="TextBlockName" HorizontalAlignment="Left" TextAlignment="Right" Margin="460,7,0,0" TextWrapping="Wrap" Text="soeasy24@mail.ru" VerticalAlignment="Top" Foreground="White" FontWeight="Bold" Width="219" FontSize="18" Grid.Row="1"/>
+
+
+
+        </Grid>
+        <Grid HorizontalAlignment="Left" Height="400" Margin="130,100,0,0" VerticalAlignment="Top" Width="770">
+            <Grid x:Name="ProfilMain" Visibility="Hidden">
+                <Rectangle  Height="380" Margin="5,10,392,0" Stroke="Gray" VerticalAlignment="Top" RadiusX="50" RadiusY="50">
+                    <Rectangle.Effect>
+                        <DropShadowEffect ShadowDepth="15" BlurRadius="10"></DropShadowEffect>
+                    </Rectangle.Effect>
+                </Rectangle>
+                <TextBlock HorizontalAlignment="Center" Margin="10,32,387,0" TextWrapping="Wrap" TextAlignment="Center" Text="Личные данные" VerticalAlignment="Top" Foreground="White" Width="373" FontSize="20" FontWeight="Bold"/>
+                <Ellipse Height="100" Width="100" Margin="35,85,635,215">
+                    <Ellipse.Fill>
+                        <ImageBrush x:Name="PersonalImgProfile" Stretch="UniformToFill" ImageSource="profil 2.png"/>
+                    </Ellipse.Fill>
+                </Ellipse>
+                <Button Margin="156,158,454,215" Content="Загрузить картинку" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="16" FontWeight="Bold" RenderTransformOrigin="1.375,-0.296" Click="Button_Click">
+
+                </Button>
+                <Rectangle  Height="380" Margin="395,10,6,0" Stroke="Gray" VerticalAlignment="Top" RadiusX="50" RadiusY="50">
+                    <Rectangle.Effect>
+                        <DropShadowEffect ShadowDepth="15" BlurRadius="10"/>
+                    </Rectangle.Effect>
+                </Rectangle>
+                <TextBlock HorizontalAlignment="Center" Margin="394,32,3,0" TextWrapping="Wrap" TextAlignment="Center" Text="Безопасность" VerticalAlignment="Top" Foreground="White" Width="373" FontSize="20" FontWeight="Bold"/>
+                <TextBlock HorizontalAlignment="Left" Margin="35,225,0,0" TextWrapping="Wrap" Text="Имя, фамилия и отчество" VerticalAlignment="Top" Foreground="White" FontSize="16" FontWeight="Bold"/>
+                <TextBlock HorizontalAlignment="Left" Margin="35,246,0,0" TextWrapping="Wrap" Text="не указано" VerticalAlignment="Top" Foreground="White" FontSize="14" FontWeight="Bold"/>
+                <TextBlock HorizontalAlignment="Left" Margin="35,288,0,0" TextWrapping="Wrap" Text="Дата рождения" VerticalAlignment="Top" Foreground="White" FontSize="16" FontWeight="Bold"/>
+                <TextBlock HorizontalAlignment="Left" Margin="35,309,0,0" TextWrapping="Wrap" Text="не указано" VerticalAlignment="Top" Foreground="White" FontSize="14" FontWeight="Bold"/>
+                <TextBlock HorizontalAlignment="Left" Margin="430,103,0,0" TextWrapping="Wrap" Text="Пароль" VerticalAlignment="Top" Foreground="White" FontSize="16" FontWeight="Bold"/>
+                <TextBlock HorizontalAlignment="Left" Margin="431,130,0,0" TextWrapping="Wrap" x:Name="TextBlockPassChange" Text="Изменен " VerticalAlignment="Top" Foreground="White" FontSize="14" FontWeight="Bold"/>
+                <TextBlock HorizontalAlignment="Left" Margin="431,176,0,0" TextWrapping="Wrap" Text="Электронный адрес" VerticalAlignment="Top" Foreground="White" FontSize="16" FontWeight="Bold"/>
+                <TextBlock HorizontalAlignment="Left" Margin="430,204,0,0" TextWrapping="Wrap" Text="mail " VerticalAlignment="Top" Foreground="White" FontSize="14" FontWeight="Bold"/>
+            </Grid>
+            <Grid x:Name="ProfilPersonal" Margin="1,0,0,0" Visibility="Hidden">
+                <Label x:Name="x" Content="Имя" HorizontalAlignment="Left" Height="30" Margin="17,86,0,0" VerticalAlignment="Top" Width="360" FontSize="14" Foreground="#FFBBB7B7"/>
+                <TextBox x:Name="ProfilTexBoxName" HorizontalAlignment="Left" Height="34" Margin="16,117,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="361" Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" Foreground="White" FontSize="14" VerticalContentAlignment="Center" Style="{DynamicResource TextBoxStyle1}" LostFocus="ProfilTexBoxName_LostFocus"/>
+                <Path x:Name="PathTextBoxName" Data="M20,174 L380,174" HorizontalAlignment="Left" Height="4" Margin="18,150.5,0,0" Stretch="Fill" VerticalAlignment="Top" Width="360" Stroke="White"/>
+                <TextBlock HorizontalAlignment="Left" Height="34" TextAlignment="Center" TextWrapping="Wrap" Text="Личные данные" VerticalAlignment="Top" Width="770" FontSize="20" FontWeight="Bold" Foreground="White"/>
+                <Label x:Name="фыв" Content="Почта" HorizontalAlignment="Left" Height="29" Margin="15,172,0,0" VerticalAlignment="Top" Width="363" FontSize="14" Foreground="#FFBBB7B7"/>
+                <TextBox x:Name="ProfilTextBoxSurname" HorizontalAlignment="Left" Height="34" Margin="15,201,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="363" Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" Foreground="White" FontSize="14" VerticalContentAlignment="Center" Style="{DynamicResource TextBoxStyle1}" LostFocus="ProfilTextBoxSurname_LostFocus"/>
+                <Path x:Name="PathTextBoxSurname" Data="M20,174 L380,174" HorizontalAlignment="Left" Height="4" Margin="17.333,234.501,0,0" Stretch="Fill" VerticalAlignment="Top" Width="360" Stroke="White"/>
+                <Label x:Name="От" Content="Отчество" HorizontalAlignment="Left" Height="30" Margin="17,260,0,0" VerticalAlignment="Top" Width="360" FontSize="14" Foreground="#FFBBB7B7"/>
+                <TextBox x:Name="ProfilTextBoxPatronymic" HorizontalAlignment="Left" Height="34" Margin="16,291,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="361" Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" Foreground="White" FontSize="14" VerticalContentAlignment="Center" Style="{DynamicResource TextBoxStyle1}" LostFocus="ProfilTextBoxPatronymic_LostFocus"/>
+                <Path x:Name="PathTextBoxPatronymic" Data="M20,174 L380,174" HorizontalAlignment="Left" Height="4" Margin="18,324.5,0,0" Stretch="Fill" VerticalAlignment="Top" Width="360" Stroke="White"/>
+                <Label x:Name="x_Copy" Content="Дата рождения" HorizontalAlignment="Left" Height="30" Margin="401,171,0,0" VerticalAlignment="Top" Width="360" FontSize="14" Foreground="#FFBBB7B7"/>
+                <TextBox x:Name="ProfilTextDateBrith" HorizontalAlignment="Left" Height="34" Margin="401,201,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="362" Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" Foreground="White" FontSize="14" VerticalContentAlignment="Center" Style="{DynamicResource TextBoxStyle1}" IsEnabled="False"/>
+                <Path x:Name="PathTextDateBrith" Data="M20,174 L380,174" HorizontalAlignment="Left" Height="3.501" Margin="401,235,0,0" Stretch="Fill" VerticalAlignment="Top" Width="295.333" Stroke="White"/>
+                <Button x:Name="btnProfilSave" Content="Сохранить" HorizontalAlignment="Left" Height="40" Margin="311,352,0,0" VerticalAlignment="Top" Width="154" Background="#FF005ADC" BorderBrush="{x:Null}" Foreground="White" FontSize="16" Click="btnProfilSave_Click" >
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="5"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <DatePicker x:Name="xqwe" HorizontalAlignment="Left" Margin="665,208,0,0" VerticalAlignment="Top" Foreground="#FF333333" Background="{x:Null}" BorderBrush="{x:Null}" Width="30" SelectedDateChanged="xqwe_SelectedDateChanged"/>
+            </Grid>
+            <Grid x:Name="Sec" Visibility="Hidden" DataContextChanged="Grid_DataContextChanged">
+
+                <TextBlock HorizontalAlignment="Center" Margin="0,0,3,0" TextWrapping="Wrap" TextAlignment="Center" Text="Безопасность" VerticalAlignment="Top" Foreground="White" Width="767" FontSize="20" FontWeight="Bold"/>
+                <Ellipse Margin="29,132,691,218"  Width="30" Height="30" Fill="LightGray">
+
+                </Ellipse>
+                <materialDesign:PackIcon Kind="Key" Background="Transparent" Foreground=" #808080" Margin="46,149,0,0" RenderTransformOrigin="0.417,0.458"/>
+                <TextBlock HorizontalAlignment="Left" Margin="84,146,0,0" TextWrapping="Wrap" Text="Пароль" VerticalAlignment="Top" FontWeight="Bold" Foreground="White" FontSize="14"/>
+                <TextBlock HorizontalAlignment="Left" Margin="84,170,0,0" TextWrapping="Wrap" Text="Изменен" VerticalAlignment="Top" Foreground="White"/>
+            </Grid>
+            <Grid x:Name="Addnotes" Visibility="Hidden">
+                <TextBlock HorizontalAlignment="Left" TextAlignment="Center" TextWrapping="Wrap" Text="Добавление заметки" VerticalAlignment="Top" Foreground="White" FontSize="20" FontWeight="Bold" Width="770"/>
+                <Label x:Name="asd" Content="Название заметки" HorizontalAlignment="Left" Height="30" Margin="27,104,0,0" VerticalAlignment="Top" Width="295" FontSize="14" Foreground="#FFBBB7B7"/>
+                <TextBox x:Name="AddNotesName" HorizontalAlignment="Left" Height="34" Margin="27,134,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="295" Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" Foreground="White" FontSize="14" VerticalContentAlignment="Center" Style="{DynamicResource TextBoxStyle1}"/>
+                <Path x:Name="PathNameNotes" Data="M20,174 L380,174" HorizontalAlignment="Left" Height="3.501" Margin="27,168,0,0" Stretch="Fill" VerticalAlignment="Top" Width="295.333" Stroke="White"/>
+                <Label x:Name="asd_Copy" Content="Описание заметки" HorizontalAlignment="Left" Height="30" Margin="27,232,0,0" VerticalAlignment="Top" Width="295" FontSize="14" Foreground="#FFBBB7B7"/>
+                <TextBox x:Name="zxc_Copy" HorizontalAlignment="Left" Height="34" Margin="27,262,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="295" Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" Foreground="White" FontSize="14" VerticalContentAlignment="Center" Style="{DynamicResource TextBoxStyle1}"/>
+                <Path x:Name="PathDeskNotes"  Data="M20,174 L380,174" HorizontalAlignment="Left" Height="3.501" Margin="27,295.5,0,0" Stretch="Fill" VerticalAlignment="Top" Width="295.333" Stroke="White"/>
+                <Label x:Name="asd_Copy1" Content="Дата и время заметки" HorizontalAlignment="Left" Height="30" Margin="415,104,0,0" VerticalAlignment="Top" Width="296" FontSize="14" Foreground="#FFBBB7B7"/>
+                <TextBox x:Name="AddNotesDate" HorizontalAlignment="Left" Height="34" Margin="415,134,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="296" Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" Foreground="White" FontSize="14" VerticalContentAlignment="Center" Style="{DynamicResource TextBoxStyle1}"/>
+                <Path x:Name="PathDateNotes" Data="M20,174 L380,174" HorizontalAlignment="Left" Height="1.001" Margin="415.5,167.999,0,0" Stretch="Fill" VerticalAlignment="Top" Width="295.333" Stroke="White"/>
+                <DatePicker x:Name="Picker" Margin="683,141,55,236" RenderTransformOrigin="0.5,0.5">
+                    <DatePicker.Resources>
+                        <Style TargetType="{x:Type DatePickerTextBox}">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate>
+                                        <TextBox Text="{Binding SelectedDate, RelativeSource={RelativeSource AncestorType={x:Type DatePicker}}, StringFormat=\{0:dd/MM/yyyy hh:mm:ss\}}"/>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </DatePicker.Resources>
+                    <DatePicker.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform AngleX="-0.913"/>
+                            <RotateTransform/>
+                            <TranslateTransform X="-3.984"/>
+                        </TransformGroup>
+                    </DatePicker.RenderTransform>
+                </DatePicker>
+                <Label x:Name="asd_Copy2" Content="Описание заметки" HorizontalAlignment="Left" Height="30" Margin="27,232,0,0" VerticalAlignment="Top" Width="295" FontSize="14" Foreground="#FFBBB7B7"/>
+                <TextBox x:Name="AddNotesDesk" HorizontalAlignment="Left" Height="34" Margin="27,262,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="295" Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" Foreground="White" FontSize="14" VerticalContentAlignment="Center" Style="{DynamicResource TextBoxStyle1}"/>
+                <Path Data="M20,174 L380,174" HorizontalAlignment="Left" Height="1" Margin="416,295.918,0,0" Stretch="Fill" VerticalAlignment="Top" Width="295.333" Stroke="White"/>
+                <Label x:Name="asd_Copy6" Content="Важность заметки" HorizontalAlignment="Left" Height="30" Margin="416,233,0,0" VerticalAlignment="Top" Width="296" FontSize="14" Foreground="#FFBBB7B7"/>
+                <ComboBox x:Name="AddNotesLvl" FontSize="16" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="416,263,0,0" VerticalAlignment="Top" Width="295" Height="33" Background="#FFAA7E7E" BorderBrush="{x:Null}" Foreground="Black">
+                    <ComboBoxItem Content="Низкий уровень" FontSize="16"/>
+                    <ComboBoxItem Content="Средний уровень уровень" FontSize="16"/>
+                    <ComboBoxItem Content="Высокий уровень уровень" FontSize="16"/>
+                </ComboBox>
+                <Button x:Name="btnAddNotes" Content="Добавить заметку" HorizontalAlignment="Left" Height="40" Margin="311,352,0,0" VerticalAlignment="Top" Width="154" Background="#FF005ADC" BorderBrush="{x:Null}" Foreground="White" FontSize="16" Click="btnAddNotes_Click" >
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="5"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+
+
+
+            </Grid>
+            <Grid x:Name="GridAllNotes" Visibility="Hidden">
+                <ListView FontSize="16" x:Name="list" HorizontalAlignment="Left" Height="400" VerticalAlignment="Top" Width="770" Background="{x:Null}" FontWeight="Bold" BorderBrush="{x:Null}" Foreground="White" >
+                    <ListView.View>
+                        <GridView x:Name="listGrid">
+                            <GridViewColumn Width="150" Header="Название" DisplayMemberBinding="{Binding name}"/>
+                            <GridViewColumn Width="250" Header="Описание" DisplayMemberBinding="{Binding desk}"/>
+                            <GridViewColumn Width="125" Header="Дата" DisplayMemberBinding="{Binding date}"/>
+                            <GridViewColumn Width="125" Header="Время" DisplayMemberBinding="{Binding time}"/>
+                            <GridViewColumn Width="125" Header="Важность" DisplayMemberBinding="{Binding importance}"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </Grid>
+            <Grid x:Name="CurrentNotes">
+                <ListView x:Name="NotesS" HorizontalAlignment="Left" Height="379" Margin="0,-17,0,0" VerticalAlignment="Top" Width="770" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" FontSize="16" FontWeight="Bold" Visibility="Hidden">
+                    <ListView.View>
+                        <GridView x:Name="as">
+                            <GridViewColumn Width="150" Header="Название" DisplayMemberBinding="{Binding name}"/>
+                            <GridViewColumn Width="250" Header="Описание" DisplayMemberBinding="{Binding desk}"/>
+                            <GridViewColumn Width="125" Header="Дата" DisplayMemberBinding="{Binding date}"/>
+                            <GridViewColumn Width="125" Header="Время" DisplayMemberBinding="{Binding time}"/>
+                            <GridViewColumn Width="125" Header="Важность" DisplayMemberBinding="{Binding importance}"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+
+            </Grid>
+            <Grid x:Name="ExpectedNotes" Visibility="Hidden">
+                <ListView x:Name="NotessS" HorizontalAlignment="Left" Height="379" Margin="0,-17,0,0" VerticalAlignment="Top" Width="770" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="16" FontWeight="Bold">
+                    <ListView.View>
+                        <GridView x:Name="xxxxxx">
+                            <GridViewColumn Header="Номер" DisplayMemberBinding="{Binding id}"/>
+                            <GridViewColumn Width="150" Header="Название" DisplayMemberBinding="{Binding name}"/>
+                            <GridViewColumn Width="250" Header="Описание" DisplayMemberBinding="{Binding desk}"/>
+                            <GridViewColumn Width="110" Header="Дата" DisplayMemberBinding="{Binding date}"/>
+                            <GridViewColumn Width="110" Header="Время" DisplayMemberBinding="{Binding time}"/>
+                            <GridViewColumn Width="110" Header="Важность" DisplayMemberBinding="{Binding importance}"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                <ComboBox x:Name="comboBoxNotes" HorizontalAlignment="Left" Height="28" Margin="139,367,0,0" VerticalAlignment="Top" Width="92" RenderTransformOrigin="0.174,0.357"/>
+            </Grid>
+            <Grid x:Name="CompletesNotes" Visibility="Hidden">
+                <ListView x:Name="NotesSs" HorizontalAlignment="Left" Height="379" Margin="0,-17,0,0" VerticalAlignment="Top" Width="770" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="16" FontWeight="Bold">
+                    <ListView.View>
+                        <GridView x:Name="ass">
+                            <GridViewColumn Width="150" Header="Название" DisplayMemberBinding="{Binding name}"/>
+                            <GridViewColumn Width="250" Header="Описание" DisplayMemberBinding="{Binding desk}"/>
+                            <GridViewColumn Width="125" Header="Дата" DisplayMemberBinding="{Binding date}"/>
+                            <GridViewColumn Width="125" Header="Время" DisplayMemberBinding="{Binding time}"/>
+                            <GridViewColumn Width="125" Header="Важность" DisplayMemberBinding="{Binding importance}"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </Grid>
+            <Grid d:IsHidden="True" Visibility="Hidden">
+                <ListBox x:Name="userList" HorizontalAlignment="Left" Height="311" Margin="572,15,0,0" VerticalAlignment="Top" Width="188" Background="{x:Null}" BorderBrush="#FFABADB3" Foreground="White" FontSize="14" FontWeight="Bold">
+                    <ListBox.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Личное сообщение" Click="MenuItem_Click"/>
+                            <MenuItem Header="Отправить файл" Click="SendImgChat_Click"></MenuItem>
+                        </ContextMenu>
+                    </ListBox.ContextMenu>
+                </ListBox>
+
+                <RichTextBox x:Name="chatBox" HorizontalAlignment="Left" Height="286" Margin="10,40,0,0" VerticalAlignment="Top" Width="557" Background="{x:Null}" Foreground="White" Block.LineHeight="6">
+                    <FlowDocument>
+                        <Paragraph>
+                            <Run Text=""/>
+                        </Paragraph>
+                    </FlowDocument>
+                </RichTextBox>
+                <TextBox x:Name="messageData" HorizontalAlignment="Left" Height="49" Margin="10,331,0,0" TextWrapping="Wrap" Text="&#xD;&#xA;" VerticalAlignment="Top" Width="557" Background="{x:Null}" Foreground="White" FontSize="16" BorderBrush="#FFABADB3" KeyUp="messageData_KeyUp"/>
+                <TextBox x:Name="nicknameData" HorizontalAlignment="Left" Height="25" Margin="10,15,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="402" Background="{x:Null}" Foreground="White" FontSize="18" IsEnabled="False"/>
+                <Label x:Name="nameData" Content="Label" HorizontalAlignment="Left" Margin="529,326,0,0" VerticalAlignment="Top" Foreground="{x:Null}"/>
+                <Button x:Name="enterChat" Content="Присоедениться к чату" HorizontalAlignment="Left" VerticalAlignment="Top" Width="155" Margin="412,15,0,0" Click="enterChat_Click" RenderTransformOrigin="0.546,0" Height="25" Background="{x:Null}" FontSize="14" Foreground="White"/>
+
+            </Grid>
+        </Grid>
+
+    </Grid>
+
+
+
+
+
+</Window>

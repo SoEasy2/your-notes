@@ -1,0 +1,30 @@
+﻿<Window x:Class="Skooby.Callendar"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Skooby"
+        mc:Ignorable="d"
+        Title="Callendar" Height="354.563" Width="257.25" ResizeMode="NoResize" Closing="Window_Closing">
+    <Grid Margin="0,0,-6,-1">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="179*"/>
+            <ColumnDefinition Width="67*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.982,0.5" StartPoint="0.023,0.5">
+                <GradientStop Color="#FF000040" Offset="1"/>
+                <GradientStop Color="#FF010121"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Calendar x:Name="calendar1" HorizontalAlignment="Left" Margin="32,16,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" SelectedDatesChanged="calendar1_SelectedDatesChanged"/>
+        <Grid HorizontalAlignment="Left" Height="152" Margin="0,182,0,-7" VerticalAlignment="Top" Width="220" Grid.ColumnSpan="2">
+            <ScrollViewer  HorizontalScrollBarVisibility="Disabled" Width="218" FontSize="14" VerticalScrollBarVisibility="Auto" Margin="1,0,1,10">
+                <TextBlock x:Name="NotesNow" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Foreground="White" FontSize="13" Width="184"/>
+
+
+            </ScrollViewer>
+        </Grid>
+
+    </Grid>
+</Window>
